@@ -1,23 +1,14 @@
 ﻿using System;
+using Code.Input.Base;
+using Code.Input.Enums.Swipe;
+using UnityEditor.Media;
 using UnityEngine;
 
-public enum SwapDirection
-{
-    Up,
-    Down,
-    Left,
-    Right
-}
-
-namespace Scenes.Code.Input
+namespace Code.Input
 {
     public class SwipeDetection : MonoBehaviour
     {
-        public delegate void OnTouchComplete();
-
-        public event OnTouchComplete TouchComplete;
-
-        [SerializeField] private InputManager _inputManager;
+        [SerializeField] private InputTouch _inputTouch;
 
 
         private Vector2 _startPosition;
@@ -25,25 +16,30 @@ namespace Scenes.Code.Input
 
         [SerializeField] private float _deadZone;
 
-        private SwapDirection _swap;
+        private ESwapDirection _swap;
+
+        public delegate void OnTouchComplete(ESwapDirection swapDirection, Vector2 dir);
+
+        public event OnTouchComplete TouchComplete;
+
+        public InputBase GetInput() => _inputTouch;
 
         private void Start()
         {
-            _inputManager.OnStartTouch += SwipeStart;
-            _inputManager.OnEndTouch += SwipeEnd;
+            _inputTouch.OnStartTouch += SwipeStart;
+            _inputTouch.OnEndTouch += SwipeEnd;
         }
 
         private void OnEnable()
         {
-            _inputManager.OnStartTouch += SwipeStart;
-            _inputManager.OnEndTouch += SwipeEnd;
+            _inputTouch.OnStartTouch += SwipeStart;
+            _inputTouch.OnEndTouch += SwipeEnd;
         }
-
 
         private void OnDisable()
         {
-            _inputManager.OnStartTouch -= SwipeStart;
-            _inputManager.OnEndTouch -= SwipeEnd;
+            _inputTouch.OnStartTouch -= SwipeStart;
+            _inputTouch.OnEndTouch -= SwipeEnd;
         }
 
         private void SwipeStart(Vector2 position, double time)
@@ -70,18 +66,21 @@ namespace Scenes.Code.Input
 
         private void SwipeDirection(Vector2 direction)
         {
+            Vector2 dirStep = Vector2.zero;
             if (Math.Abs(direction.x) > Math.Abs(direction.y))
             {
-                _swap = direction.x > 0 ? SwapDirection.Right : SwapDirection.Left;
+                _swap = direction.x > 0 ? ESwapDirection.Right : ESwapDirection.Left;
+                dirStep = _swap == ESwapDirection.Right ? Vector2.left : Vector2.right;
             }
             else
             {
-                _swap = direction.y > 0 ? SwapDirection.Up : SwapDirection.Down;
+                _swap = direction.y > 0 ? ESwapDirection.Up : ESwapDirection.Down;
+                dirStep = _swap == ESwapDirection.Up ? Vector2.down : Vector2.up;
             }
 
-            TouchComplete?.Invoke();
+            TouchComplete?.Invoke(_swap, dirStep);
         }
 
-        public SwapDirection GetSwapDirection() => _swap;
+        public ESwapDirection GetSwapDirection() => _swap;
     }
 }

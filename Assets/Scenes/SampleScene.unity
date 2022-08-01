@@ -10071,7 +10071,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1b4527c6bc14ae7b9e1fc22ed11775f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inputManager: {fileID: 96326588}
+  _inputTouch: {fileID: 96326588}
   _deadZone: 80
 --- !u!4 &426612358 stripped
 Transform:
@@ -18764,30 +18764,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57494bd72da25c04fbfa9b92e645a825, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cubesMoveComponent:
+    _dataAnim:
+      DurationMove: 0.35
+      DurationStack: 0.15
+      Vibrato: 2
+      Elasticity: 0.1
+      RotateAngel: {x: 25, y: 0, z: 25}
+      Ease: 10
+  _nodesComponent:
+    _lineNodesList: []
   _swipeDetection: {fileID: 421419513}
   _timeDetectedSwipe: 0.5
   _blockZone: {fileID: 921549161}
-  _cubes: {fileID: 664972299}
-  _dataDir:
-  - DirectionMove: {x: 0, y: 0, z: -1}
-    DirectionRotate: {x: 25, y: 0, z: 0}
-    SwapDirection: 0
-  - DirectionMove: {x: 0, y: 0, z: 1}
-    DirectionRotate: {x: -25, y: 0, z: 0}
-    SwapDirection: 1
-  - DirectionMove: {x: 1, y: 0, z: 0}
-    DirectionRotate: {x: 0, y: 0, z: -25}
-    SwapDirection: 2
-  - DirectionMove: {x: -1, y: 0, z: 0}
-    DirectionRotate: {x: 0, y: 0, z: 25}
-    SwapDirection: 3
-  _dataAnim:
-    DurationMove: 0.35
-    DurationStack: 0.15
-    Vibrato: 2
-    Elasticity: 0.1
-    Ease: 10
-  lineNodesList: []
+  _unitsZone: {fileID: 664972299}
 --- !u!1001 &805216426
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44996,7 +44986,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d57d0ca5be4d9c84098199e66dfae74d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fps: {fileID: 1833620616}
+  _fpsLabel: {fileID: 1833620616}
 --- !u!114 &1833620616
 MonoBehaviour:
   m_ObjectHideFlags: 0

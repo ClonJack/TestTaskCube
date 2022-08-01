@@ -1,11 +1,10 @@
-using System;
+using Code.Input.Base;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Scenes.Code.Input
+namespace Code.Input
 {
-    [DefaultExecutionOrder(-1)]
-    public class InputManager : MonoBehaviour
+    public class InputTouch : InputBase
     {
         public delegate void StartTouch(Vector2 position, double time);
 
@@ -15,31 +14,33 @@ namespace Scenes.Code.Input
 
         public event EndTouch OnEndTouch;
 
-
         private PlayerControls _playerControls;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+            
             _playerControls = new PlayerControls();
-        }
 
+            SetInputActionAsset(_playerControls.asset);
+        }
 
         private void OnEnable()
         {
-            _playerControls.Enable();
-            
+            InvokeEnableInput();
+
             _playerControls.Touch.PrimaryContact.started += StartTouchPrimary;
             _playerControls.Touch.PrimaryContact.canceled += EndTouchPrimary;
         }
 
         private void OnDisable()
         {
-            _playerControls.Disable();
+            InvokeDisableInput();
 
             _playerControls.Touch.PrimaryContact.started -= StartTouchPrimary;
             _playerControls.Touch.PrimaryContact.canceled -= EndTouchPrimary;
         }
-        
+
         private void StartTouchPrimary(InputAction.CallbackContext ctx)
         {
             OnStartTouch?.Invoke(_playerControls.Touch.PrimaryPosition.ReadValue<Vector2>(),

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e89d4ca4ddc4498da096852dbeaa86c1, type: 3}
-  m_Name: DataUp
+  m_Name: DataUpSO
   m_EditorClassIdentifier: 
   DBUpProperties:
   - DBMaterials: {fileID: 2100000, guid: 21da3018a55b8a9479a698b51fd7f9e9, type: 2}

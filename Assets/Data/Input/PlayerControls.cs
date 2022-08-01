@@ -29,11 +29,11 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""PrimaryContact"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""b15e26be-f23f-4c62-9273-51d70c88a145"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press(pressPoint=0.5)"",
+                    ""interactions"": ""Press"",
                     ""initialStateCheck"": true
                 },
                 {
